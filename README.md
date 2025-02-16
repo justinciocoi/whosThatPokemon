@@ -15,3 +15,5 @@ This project encompasses a simple webpage which you can use to play the classic 
 - Introduce hints that can be used which might include
     - Type of pokemon
     - Regional Pokedex to which they pertain
+
+- Make the new pokemon button remove any entered text
