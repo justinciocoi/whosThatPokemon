@@ -157,6 +157,12 @@ body {
     transform: translateY(-5vh);
   }
 
+  #answer {
+    display: none;
+    position: absolute;
+    transform: translateY(-50px);
+  }
+
   .icon {
     height: 50px;
     width: 50px;
@@ -174,4 +180,9 @@ body {
     position: fixed;
     margin: 20px;
     display: flex;
+  }
+
+  #whosThat {
+    color: #FACC04;
+    text-shadow:7px 4px #2F68B3;
   }

@@ -177,7 +177,7 @@ function refreshGuess() {
         incorrectCounter++
         setTimeout(() => {
             fetchPokemonData()
-        }, 0);
+        }, 1000);
     }
     if(isGuessed) {
         isGuessed = !isGuessed
