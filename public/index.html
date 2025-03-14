@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="styles/main.css">
     <div id="pokemonName"></div>
 </head>
-<body>
+<body id="body">
+    <div id="effect"></div>
     <div id="links">
         <a target="_blank" href="https://github.com/justinciocoi/whosThatPokemon">
             <img class="icon" src="https://github.com/justinciocoi/justinciocoi.github.io/blob/main/public/img/githubblue.png?raw=true">
@@ -36,8 +37,7 @@
 
     <div id="centerRow" class="outerFlex">
         <div class="innerFlex" id="centerLeft">
-            <button id="refreshButton" onclick="refreshGuess()">New Pokémon</button>
-            <button id="refreshButton" onclick="revealAnswer()">Reveal Image</button>
+            <button id="refreshButton" onclick="revealAnswer()">Reveal Pokémon</button>
 
         </div>
 
@@ -61,7 +61,13 @@
 
 
     <div class="outerFlex">
-        <div class="innerFlex" id="bottomLeft"></div>
+        <div class="innerFlex" id="bottomLeft">
+            <div id="disclaimer">
+                This app is not affiliated, endorsed or supported by Nintendo, GameFreak, or The Pokemon Company International (TPCi) in any way.
+                Use of images is supported under fair use, as this site is an educational resource and is not monetized. 
+                Pokemon, Pokemon likenesses and Pokemon character names are trademark of Nintendo. Pokemon © 2002-2025 Pokemon.
+            </div>
+        </div>
         <div class="innerFlex" id="bottomCenter">
             <input placeholder="Enter Pokémon" id="guess">
         </div>

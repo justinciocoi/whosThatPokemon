@@ -28,21 +28,15 @@ function fetchPokemonData() {
             return response.json()
         })
         .then(data => {
+            //set pre-declared vars as the fetched pokemon data
             pokemonImage = data.sprites.other["official-artwork"].front_default
             pokemonName = data.species.name
             pokemonType1 = data.types[0].type.name
             pokemonType2 = (data.types.length > 1) 
                 ? data.types[1].type.name
                 : null;            
-
-            console.log(pokemonName)
-            console.log(pokemonType1)
-            if(pokemonType2 != null)
-                console.log(pokemonType2)
-            console.log(pokemonImage)
-            console.log(isGuessed)
-
             
+            //set the pokemon images and name to the html
             document.getElementById('silhouette').src = pokemonImage
             document.getElementById('pokemonImage2').src = pokemonImage
             document.getElementById('pokemonName').innerText = pokemonName
@@ -63,7 +57,6 @@ fetchPokemonData();
 
 
 const guessText = document.getElementById('guess')
-
 guessText.addEventListener("input", checkIfCorrect)
 
 function fixPokemonName(name) {
@@ -152,6 +145,7 @@ function checkIfCorrect() {
         correctCounter++
         
         revealAnswer()
+        flashColor(0, 255, 0, 1, document.getElementById('effect'))
 
     }
 }
@@ -161,8 +155,12 @@ function revealAnswer() {
     document.getElementById('silhouette').height = '0'
 
     
-    const image = document.getElementById('pokemonImage2Container') 
+    const image = document.getElementById('pokemonImage2Container')
     image.style.transform = 'translateY(-50vh)'
+    setTimeout(() => {
+        refreshGuess()
+    }, 2000)
+    
 }
 
 function refreshGuess() {
@@ -171,18 +169,21 @@ function refreshGuess() {
     if(isGuessed) {
         setTimeout(() => {
             fetchPokemonData()
+            document.getElementById('guess').value = ''
         }, 1000);
     }
     else {
         incorrectCounter++
         setTimeout(() => {
             fetchPokemonData()
+            document.getElementById('guess').value = ''
         }, 1000);
     }
     if(isGuessed) {
         isGuessed = !isGuessed
     }
     console.log(isGuessed)
+
 }
 
 function updateTracker() {
@@ -207,5 +208,26 @@ function roundTo(value, decimals) {
   }
 
 
+function flashColor(r, g, b, a, div) {
 
+    let step = 0.01;  // Opacity increment
+    let interval = 5; // Delay between steps in milliseconds
+    let steps = Math.round(a / step); // Number of steps to reach full opacity
+
+    
+    for (let i = 0; i <= steps; i++) {
+        setTimeout(() => {
+            div.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${(i * step).toFixed(2)})`;
+        }, i * interval);
+    }
+
+    // Fade Out (starts after fade-in is complete)
+    for (let i = a; i >= 0; i--) {
+        setTimeout(() => {
+            div.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${(i * step).toFixed(2)})`;
+        }, (steps + i) * interval);
+    }
+    
+
+}
 
