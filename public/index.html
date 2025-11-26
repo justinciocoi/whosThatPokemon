@@ -38,17 +38,23 @@
     <div id="centerRow" class="outerFlex">
         <div class="innerFlex" id="centerLeft">
             <button id="refreshButton" onclick="revealAnswer()">Reveal Pokémon</button>
-
+            <button id="hintButton" onclick="revealHint()">Hint</button>
         </div>
 
         <div class="innerFlex" id="centerCenter">
-            <div class="title" id="answer">ANSWER</div>
+            <div class="title" id="answer"></div>
             <div id="silhouette">
                 <img id="pokemonImage" src="">
                 
             </div>
             <div id="pokemonImage2Container">
                 <img id="pokemonImage2" src="">
+            </div>
+            <div class="type" id="type1">
+                <img class="typeimg" id="type1img">
+            </div>
+            <div class="type" id="type2">
+                <img class="typeimg" id="type2img">
             </div>
         </div>
 

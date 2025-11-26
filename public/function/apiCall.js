@@ -15,6 +15,28 @@ let isGuessed = false
 let correctCounter = 0;
 let incorrectCounter = 0;
 
+const typeMap = {
+    bug: "assets/BugIC_Box_RS.png",
+    dark: "assets/DarkIC_Box_RS.png",
+    dragon: "assets/DragonIC_Box_RS.png",
+    electric: "assets/ElectricIC_Box_RS.png",
+    fighting: "assets/FightingIC_Box_RS.png",
+    fire: "assets/FireIC_Box_RS.png",
+    flying: "assets/FlyingIC_Box_RS.png",
+    ghost: "assets/GhostIC_Box_RS.png",
+    grass: "assets/GrassIC_Box_RS.png",
+    ground: "assets/GroundIC_Box_RS.png",
+    ice: "assets/IceIC_Box_RS.png",
+    normal: "assets/NormalIC_Box_RS.png",
+    poison: "assets/PoisonIC_Box_RS.png",
+    psychic: "assets/PsychicIC_Box_RS.png",
+    rock: "assets/RockIC_Box_RS.png",
+    steel: "assets/SteelIC_Box_RS.png",
+    water: "assets/WaterIC_Box_RS.png",
+    fairy: "assets/FairyIC_XY.png",
+
+}
+
 function fetchPokemonData() {
 
     //comment out the first line and activate the second line to debug with specific pokemon via natl dex #
@@ -39,7 +61,7 @@ function fetchPokemonData() {
             //set the pokemon images and name to the html
             document.getElementById('silhouette').src = pokemonImage
             document.getElementById('pokemonImage2').src = pokemonImage
-            document.getElementById('pokemonName').innerText = pokemonName
+            document.getElementById('answer').innerText = pokemonName
 
             // Target the div
             const silhouetteDiv = document.getElementById("silhouette");
@@ -135,7 +157,7 @@ function fixPokemonName(name) {
 
 function checkIfCorrect() {
 
-    let name = fixPokemonName(document.getElementById('pokemonName').innerText)
+    let name = fixPokemonName(pokemonName)
     
 
     guess = guessText.value
@@ -152,8 +174,12 @@ function checkIfCorrect() {
 
 function revealAnswer() {
     document.getElementById('silhouette').style.backgroundColor ='rgba(0,0,0,0)'
-    document.getElementById('silhouette').height = '0'
+    document.getElementById('silhouette').height = '0';
+    const answer = document.getElementById('answer');
 
+    answer.style.opacity = '100%'
+
+    
     
     const image = document.getElementById('pokemonImage2Container')
     image.style.transform = 'translateY(-50vh)'
@@ -163,8 +189,35 @@ function revealAnswer() {
     
 }
 
+function revealHint() {
+    console.log(pokemonType1)
+    console.log(pokemonType2)
+    const type1img = typeMap[pokemonType1];
+    const type2img = typeMap[pokemonType2];
+    const type1 = document.getElementById('type1img');
+    const type2 = document.getElementById('type2img');
+
+    type1.style.opacity = '100%';
+    type2.style.opacity = '100%';
+
+    type1.src = type1img
+    if(pokemonType2 !== null)
+        type2.src = type2img
+    else
+        type2.src = "";
+
+}
+
 function refreshGuess() {
     const image = document.getElementById('pokemonImage2Container') 
+    const answer = document.getElementById('answer');
+    const type1 = document.getElementById('type1img');
+    const type2 = document.getElementById('type2img');
+
+    type1.style.opacity = '0%';
+    type2.style.opacity = '0%';
+    
+    answer.style.opacity = '0%'
     image.style.transform = 'translateY(1000px)'
     if(isGuessed) {
         setTimeout(() => {
